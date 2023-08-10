@@ -14,8 +14,8 @@ app.use(cors());
 app.use(morgan("dev"));
 
 app.use("/api/users", userRoute);
-app.use("api/chats", chatRoute);
-app.use("api/messages", chatRoute);
+app.use("/api/chats", chatRoute);
+app.use("/api/messages", messageRoute);
 
 const port = process.env.PORT || 5000;
 

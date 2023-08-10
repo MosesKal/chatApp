@@ -12,8 +12,6 @@ const Login = () => {
     LoginError,
   } = useContext(AuthContext);
 
-  console.log(loginInfo);
-
   return (
     <div onSubmit={loginUser}>
       <Form>

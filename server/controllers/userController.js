@@ -57,7 +57,10 @@ const loginUser = async (req, res) => {
 
     const token = createToken(user._id);
     res.status(200).json({ _id: user._id, name: user.name, email, token });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
 };
 
 const findUser = async (req, res) => {
@@ -72,16 +75,14 @@ const findUser = async (req, res) => {
 };
 
 const getUser = async (req, res) => {
+  try {
+    const users = await userModel.find();
 
-    try {
-      const users = await userModel.find();
-
-      res.status(200).json(users);
-    } catch (error) {
-      console.log(error);
-      res.status(500).json(error);
-    }
-  };
-
+    res.status(200).json(users);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+};
 
 module.exports = { registerUser, loginUser, findUser, getUser };
