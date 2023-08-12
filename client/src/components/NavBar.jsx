@@ -13,7 +13,7 @@ const NavBar = () => {
             ChattApp
           </Link>
         </h2>
-        {user && <span>Logged in as {user?.name}</span>}
+        {user && <span className="">Logged in as {user?.name}</span>}
         <Nav>
           <Stack direction="horizontal" gap={3}>
             {user && (
