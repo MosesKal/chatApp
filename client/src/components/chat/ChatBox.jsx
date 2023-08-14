@@ -3,15 +3,12 @@ import { Stack } from "react-bootstrap";
 import { AuthContext } from "../../context/AuthContext";
 import { ChatContext } from "../../context/ChatContext";
 import { useFetchRecipientUser } from "../../hooks/useFetchRecipient";
+import moment from "moment";
 
 const ChatBox = () => {
   const { user } = useContext(AuthContext);
-  const { currentChat, isMessagesLoading } = useContext(ChatContext);
+  const { currentChat, messages, isMessagesLoading } = useContext(ChatContext);
   const { recipientUser } = useFetchRecipientUser(currentChat, user);
-
-  console.log(recipientUser);
-  console.log("currentChat ==> ", currentChat);
-  console.log("user ==>", user);
 
   if (!recipientUser)
     return (
@@ -29,6 +26,24 @@ const ChatBox = () => {
       <div className="chat-header">
         <strong>{recipientUser?.name}</strong>
       </div>
+      <Stack gap={3} className="messages">
+        {messages &&
+          messages.map((message, index) => (
+            <Stack
+              key={index}
+              className={`${
+                message?.senderId === user?._id
+                  ? "message self align-self-end flex-grow-0"
+                  : "message algin-self-start flex-grow-0"
+              }`}
+            >
+              <span>{message.text}</span>
+              <span className="message-footer">
+                {moment(message.createdAt).calendar()}
+              </span>
+            </Stack>
+          ))}
+      </Stack>
     </Stack>
   );
 };
