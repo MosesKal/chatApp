@@ -6,8 +6,12 @@ import { useFetchRecipientUser } from "../../hooks/useFetchRecipient";
 
 const ChatBox = () => {
   const { user } = useContext(AuthContext);
-  const { currentChat, messages, isMessagesLoading } = useContext(ChatContext);
+  const { currentChat, isMessagesLoading } = useContext(ChatContext);
   const { recipientUser } = useFetchRecipientUser(currentChat, user);
+
+  console.log(recipientUser);
+  console.log("currentChat ==> ", currentChat);
+  console.log("user ==>", user);
 
   if (!recipientUser)
     return (
