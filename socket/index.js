@@ -11,6 +11,8 @@ io.on("connection", (socket) => {
   socket.on("addNewUser", (userId) => {
     !onlineUser.some((user) => user.userId === userId) &&
       onlineUser.push({ userId, socketId: socket.id });
+
+    console.log("onlineUsers", onlineUser);
   });
 });
 
