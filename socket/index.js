@@ -13,6 +13,13 @@ io.on("connection", (socket) => {
       onlineUser.push({ userId, socketId: socket.id });
 
     console.log("onlineUsers", onlineUser);
+
+    io.emit("getOnlineUsers", onlineUser);
+  });
+
+  socket.on("disconnect", () => {
+    onlineUser = onlineUser.filter((user) => user.socketId !== socket.id);
+    io.emit("getOnlineUsers", onlineUser);
   });
 });
 
