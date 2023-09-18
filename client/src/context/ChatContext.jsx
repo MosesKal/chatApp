@@ -55,6 +55,20 @@ export const ChatContextProvider = ({ children, user }) => {
 
   }, [newMessage]);
 
+  //receive message
+
+  useEffect(() => {
+    if (socket === null) return;
+
+    socket.on("getMessage", res=>{
+      if(currentChat?._id !== res.chatId) return
+    })
+
+    return ()=>{
+      socket.off("getMessage")
+    }
+
+  }, [socket, currentChat]);
 
 
   useEffect(() => {

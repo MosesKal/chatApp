@@ -19,18 +19,13 @@ io.on("connection", (socket) => {
 
   // add message
 
-  socket.on("sendMessage", (message)=>{
-    const user = onlineUser.find(user=user.userId === message.respientId)
+  socket.on("sendMessage", (message) => {
+    const user = onlineUser.find((user = user.userId === message.recipientId));
 
-    if(user){
+    if (user) {
       io.to(user.socketId).emit("getMessage", message);
     }
-
-  })
-
-  socket.on("sendMessage", (message)=>{
-    const user = onlineUser.find(user=user.userId === message.respientId)
-  })
+  });
 
   socket.on("disconnect", () => {
     onlineUser = onlineUser.filter((user) => user.socketId !== socket.id);
